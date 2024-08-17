@@ -20,14 +20,24 @@ struct ContentView: View {
         NavigationStack{
             ZStack{
                 ZStack{
-                    LinearGradient(colors: [lightBeige , mutedGold], startPoint: .center, endPoint: .bottomTrailing)
+                    LinearGradient(colors: [lightBeige , mutedGold], startPoint: .center,  endPoint: .bottomTrailing)
                         .ignoresSafeArea()
                     
                     VStack{
                         
                         HomeTopBar(viewmodel: $viewmodel)
                         SearchBar()
-                        
+                        ScrollView{
+                            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]){
+                                ForEach(viewmodel.jewellerySet , id: \.self){image in
+                                    Image(image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(.vertical)
+                                    
+                                }
+                            }
+                        }
                         Spacer()
                     }
                 }
