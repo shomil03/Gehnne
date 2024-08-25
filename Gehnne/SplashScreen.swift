@@ -12,6 +12,9 @@ struct SplashScreen: View {
     @State private var navigate = false
     let lightBeige = Color(red: 240/255, green: 235/255, blue: 221/255)
     let mutedGold = Color(red: 193/255, green: 179/255, blue: 136/255)
+    let silver = Color(red: 192/255, green: 192/255, blue: 192/255)
+    let gold = Color(red: 227/255, green: 165/255, blue: 74/255)
+    let deepBrown = Color(red: 89/255, green: 54/255, blue: 44/255)
     var body: some View {
         //        Text("Gehnee")
         //            .font(.largeTitle)
@@ -19,12 +22,12 @@ struct SplashScreen: View {
         //            .fontWidth(.expanded)
         if(!navigate){
             VStack {
-                Text("Gehnne")
+                Text("GEHNNE")
                     .font(.system(size: 60, weight: .bold, design: .default))
                     .foregroundColor(mutedGold)
+                    .shadow(color: deepBrown, radius: 20)
                     .overlay(
                         GeometryReader { geometry in
-                            // Slanting line inside the text bounds
                             Rectangle()
                                 .fill(lightBeige)
                                 .frame(width: geometry.size.width * 2.5, height: 5)
@@ -35,7 +38,7 @@ struct SplashScreen: View {
                                     withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: false)){
                                         animateStrip = true
                                         DispatchQueue.main.asyncAfter(deadline: .now()+3){
-                                            navigate = true
+//                                            navigate = true
                                         }
                                     }
                                 }
@@ -48,7 +51,7 @@ struct SplashScreen: View {
             }
         }
         else{
-            ContentView()
+//            ContentView()
         }
     
             

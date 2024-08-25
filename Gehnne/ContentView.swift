@@ -20,8 +20,8 @@ struct ContentView: View {
         NavigationStack{
             ZStack{
                 ZStack{
-                    LinearGradient(colors: [lightBeige , mutedGold], startPoint: .center,  endPoint: .bottomTrailing)
-                        .ignoresSafeArea()
+//                    LinearGradient(colors: [lightBeige , mutedGold], startPoint: .,  endPoint: .bottomTrailing)
+//                        .ignoresSafeArea()
                     
                     VStack{
                         
@@ -32,6 +32,7 @@ struct ContentView: View {
                                 ForEach(viewmodel.jewellerySet , id: \.self){image in
                                     Image(image)
                                         .resizable()
+                                        .frame(width: 150, height: 150)
                                         .scaledToFit()
                                         .padding(.vertical)
                                     
