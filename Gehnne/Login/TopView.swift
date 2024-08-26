@@ -17,7 +17,8 @@ struct TopView: View {
                     .font(.title)
                     .bold()
                 Text(details)
-                    .font(.headline)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
             }
             .padding()
             Spacer()

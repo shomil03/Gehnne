@@ -8,20 +8,49 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State var loginviewmodel = LoginViewModel()
+    @FocusState private var focusedField: Field?
     var body: some View {
-        VStack(spacing : 45){
-            TopView()
-            EmailView()
-            PasswordView()
-            Button(action: {}, label: {
-                ButtonView(title: "Sign in")
-                
-            })
-            OrView()
-            SignUp()
-            Spacer()
+        NavigationStack{
+            ScrollView{
+                VStack(spacing : 45){
+                    TopView()
+                    EmailView( focusedField: $focusedField, loginviewmodel: $loginviewmodel)
+                    PasswordView(focusedField: $focusedField)
+                    Button(action: {}, label: {
+                        ButtonView(title: "Sign in")
+                        
+                    })
+                    OrView()
+                    SignUp()
+                    Spacer()
+                }
+                .padding()
+            }
+            .scrollDisabled(true)
+            .ignoresSafeArea(.keyboard)
+            .toolbar{
+                ToolbarItem(placement: .keyboard){
+                    HStack{
+                        Spacer()
+                        Button("Done"){
+                            loginviewmodel.emailKeyboard = false
+                            loginviewmodel.passKeyboard = false
+                            hideKeyboard()
+                        }
+                        .padding(.trailing)
+                    }
+                }
+            }
+            
+            
         }
-        .padding()
+    }
+
+}
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

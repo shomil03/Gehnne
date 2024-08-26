@@ -10,7 +10,7 @@ import SwiftUI
 struct PasswordView: View {
     @State var password = ""
     @State var showPassword = false
-    @FocusState var isActive
+    var focusedField: FocusState<Field?>.Binding
     var body: some View {
         VStack(alignment:.trailing){
         ZStack(alignment : .leading){
@@ -19,22 +19,26 @@ struct PasswordView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 45)
                     .background(.gray.opacity(0.3) , in: .rect(cornerRadius: 16))
-                    .focused($isActive)
+//                    .onTapGesture {
+//                        loginviewmodel.passKeyboard = true
+//                        loginviewmodel.emailKeyboard = false
+//                    }
+                    .focused(focusedField , equals: .password)
                     .opacity(showPassword ? 0 : 1)
                 TextField("" , text: $password)
                     .padding(.leading)
                     .frame(maxWidth: .infinity)
                     .frame(height: 45)
                     .background(.gray.opacity(0.3) , in: .rect(cornerRadius: 16))
-                    .focused($isActive)
+                    .focused(focusedField , equals: .password)
                     .opacity(showPassword ? 1 : 0)
                 Text("password")
                     .padding(.leading)
-                    .offset(y : isActive || !password.isEmpty ? -50 : 0)
+                    .offset(y : focusedField.wrappedValue == .password || !password.isEmpty ? -50 : 0)
                     .onTapGesture {
-                        isActive = true
+                        focusedField.wrappedValue = .password
                     }
-                    .animation(.spring, value: isActive)
+                    .animation(.spring, value: focusedField.wrappedValue)
             }
             
             .overlay(alignment: .trailing){
@@ -57,6 +61,15 @@ struct PasswordView: View {
     }
 }
 
+struct PasswordViewPreviewWrapper: View {
+    @FocusState private var focusedField: Field?
+    @State private var loginViewModel = LoginViewModel()
+    
+    var body: some View {
+        EmailView(focusedField: ($focusedField), loginviewmodel: $loginViewModel)
+    }
+}
+
 #Preview {
-    PasswordView()
+    PasswordViewPreviewWrapper()
 }

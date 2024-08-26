@@ -25,7 +25,7 @@ struct SplashScreen: View {
                 Text("GEHNNE")
                     .font(.system(size: 60, weight: .bold, design: .default))
                     .foregroundColor(mutedGold)
-                    .shadow(color: deepBrown, radius: 20)
+//                    .shadow(color: deepBrown, radius: 20)
                     .overlay(
                         GeometryReader { geometry in
                             Rectangle()
@@ -38,7 +38,7 @@ struct SplashScreen: View {
                                     withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: false)){
                                         animateStrip = true
                                         DispatchQueue.main.asyncAfter(deadline: .now()+3){
-//                                            navigate = true
+                                            navigate = true
                                         }
                                     }
                                 }
@@ -51,7 +51,7 @@ struct SplashScreen: View {
             }
         }
         else{
-//            ContentView()
+            LoginView()
         }
     
             
