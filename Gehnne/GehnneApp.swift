@@ -20,10 +20,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct GehnneApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @State var navigationManager = NavigationManager()
     var body: some Scene {
         WindowGroup {
 //            ContentView()
             SplashScreen()
+                .environment(navigationManager)
         }
     }
 }

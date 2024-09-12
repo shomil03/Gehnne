@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct SignUp: View {
+//    @Environment(NavigationManager.self) var navigationManager
     var body: some View {
         HStack{
             Text("Don't have an account?")
-            Button("Sign up"){}
-                .bold()
+            NavigationLink(destination: CreateNewAccount(), label: {
+                Text("Sign up")
+                    .bold()
+            })
+//            Button("Sign up"){
+                
+//            }
+//                .bold()
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PasswordView: View {
     @State var password = ""
-    @State var showPassword = false
+    @Binding var loginviewmodel : LoginViewModel
     var focusedField: FocusState<Field?>.Binding
     var body: some View {
         VStack(alignment:.trailing){
@@ -24,14 +24,14 @@ struct PasswordView: View {
 //                        loginviewmodel.emailKeyboard = false
 //                    }
                     .focused(focusedField , equals: .password)
-                    .opacity(showPassword ? 0 : 1)
+                    .opacity(loginviewmodel.showPassword ? 0 : 1)
                 TextField("" , text: $password)
                     .padding(.leading)
                     .frame(maxWidth: .infinity)
                     .frame(height: 45)
                     .background(.gray.opacity(0.3) , in: .rect(cornerRadius: 16))
                     .focused(focusedField , equals: .password)
-                    .opacity(showPassword ? 1 : 0)
+                    .opacity(loginviewmodel.showPassword ? 1 : 0)
                 Text("password")
                     .padding(.leading)
                     .offset(y : focusedField.wrappedValue == .password || !password.isEmpty ? -50 : 0)
@@ -42,15 +42,32 @@ struct PasswordView: View {
             }
             
             .overlay(alignment: .trailing){
-                Label("", systemImage: showPassword ? "eye" : "eye.slash")
-                    .labelsHidden()
-                    .contentTransition(.symbolEffect(.replace))
-                    .onTapGesture {
-                        withAnimation{
-                            showPassword.toggle()
-                        }
+                Button(action: {
+                    withAnimation{
+                        loginviewmodel.showPassword.toggle()
                     }
+                }, label: {
+                    Label("", systemImage: loginviewmodel.showPassword ? "eye" : "eye.slash")
+                        .foregroundStyle(Color.blue)
+//                        .labelsHidden()
+//                        .contentTransition(.symbolEffect(.replace))
+//                        .onTapGesture {
+//                            withAnimation{
+//                                loginviewmodel.showPassword.toggle()
+//                            }
+//                        }
+                }
+                )
+//                Label("", systemImage: loginviewmodel.showPassword ? "eye" : "eye.slash")
+//                    .labelsHidden()
+//                    .contentTransition(.symbolEffect(.replace))
+//                    .onTapGesture {
+//                        withAnimation{
+//                            loginviewmodel.showPassword.toggle()
+//                        }
+//                    }
             }
+//            .padding()
             
             Button("Forget password?"){
                 
@@ -66,7 +83,7 @@ struct PasswordViewPreviewWrapper: View {
     @State private var loginViewModel = LoginViewModel()
     
     var body: some View {
-        EmailView(focusedField: ($focusedField), loginviewmodel: $loginViewModel)
+        PasswordView(loginviewmodel: $loginViewModel, focusedField: ($focusedField))
     }
 }
 

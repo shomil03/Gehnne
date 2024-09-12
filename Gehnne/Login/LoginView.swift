@@ -16,10 +16,10 @@ struct LoginView: View {
                 VStack(spacing : 45){
                     TopView()
                     EmailView( focusedField: $focusedField, loginviewmodel: $loginviewmodel)
-                    PasswordView(focusedField: $focusedField)
+                    PasswordView(loginviewmodel: $loginviewmodel, focusedField: $focusedField)
                     Button(action: {}, label: {
                         ButtonView(title: "Sign in")
-                        
+                            .foregroundStyle(Color.primary)
                     })
                     OrView()
                     SignUp()

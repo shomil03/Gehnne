@@ -17,7 +17,7 @@ struct ButtonView: View {
             .background(Color.blue)
             .clipShape(RoundedRectangle(cornerRadius: 25))
 //            .padding()
-            .foregroundStyle(Color.black)
+//            .foregroundStyle(Color.black)
             .bold()
         
     }

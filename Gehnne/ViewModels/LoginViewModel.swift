@@ -16,4 +16,11 @@ enum Field {
 class LoginViewModel{
     var emailKeyboard = false
     var passKeyboard = false
+    var showPassword = false{
+        didSet{
+            if showPassword{
+                passKeyboard = true
+            }
+        }
+    }
 }
